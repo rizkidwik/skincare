@@ -7,6 +7,7 @@ use App\Models\Kategori;
 use App\Models\Pertanyaan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SurveiController extends Controller
 {
@@ -18,8 +19,10 @@ class SurveiController extends Controller
     public function index()
     {
         $pertanyaan = Pertanyaan::all();
+
         return view('user.survei',[
             'pertanyaan' => $pertanyaan,
+
         ]);
     }
 
@@ -104,7 +107,7 @@ class SurveiController extends Controller
             $vectorPertanyaan[] =json_decode($pertanyaan->vector);
         }
 
-        $id_user = 1;
+        $id_user = Auth::user()->id;
         $answer = array_values($validReq['vector']);
 
 
@@ -145,9 +148,9 @@ endfor;
         'hasil_akhir' => $hasil_akhir
     ]);
 
-    // Answer::create([
-    //     'id_user' => $id_user,
-    //     'answer' => json_encode($answer)
-    // ]);
+    Answer::create([
+        'id_user' => $id_user,
+        'answer' => json_encode($answer)
+    ]);
     }
 }
