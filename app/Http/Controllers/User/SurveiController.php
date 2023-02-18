@@ -138,14 +138,20 @@ endfor;
     }
     // print_r($hasil_jumlah);
     $arr_hasil = array_filter($arr_hasil,'strlen');
-    $hasil_akhir = array();
+    $hasil_kategori = array();
+    $hasil_keterangan = array();
+    $hasil_icon = array();
     for($i=0;$i<count($arr_hasil);$i++)
     {
-        array_push($hasil_akhir,$kategori[$arr_hasil[$i]]->kategori);
+        array_push($hasil_kategori,$kategori[$arr_hasil[$i]]->kategori);
+        array_push($hasil_keterangan,$kategori[$arr_hasil[$i]]->keterangan);
+        array_push($hasil_icon,$kategori[$arr_hasil[$i]]->icon);
     }
-    // var_dump("Sukses",$hasil_akhir);
+    // var_dump("Sukses",$hasil_icon);
     return view('user.hasil')->with([
-        'hasil_akhir' => $hasil_akhir
+        'hasil_kategori' => $hasil_kategori,
+        'hasil_keterangan' => $hasil_keterangan,
+        'hasil_icon' => $hasil_icon,
     ]);
 
     Answer::create([

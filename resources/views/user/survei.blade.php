@@ -18,45 +18,64 @@
         <!-- Image and text -->
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="#">
-
-                Survei
+                Skincare Recomendation
             </a>
         </nav>
+        <div class="card">
+            <div class="card-header">
+                Diagnosa
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
 
-        <form action="{{ route('survei.proses') }}" method="POST" enctype="multipart/form-data" id="form_pertanyaan">
-            <input type="hidden" name="id_user" value=1>
-            @csrf
-            @php
-                $i = 1;
-            @endphp
-            @foreach ($pertanyaan as $pertanyaan)
-                <div class="row">
+                    <form action="{{ route('survei.proses') }}" method="POST" enctype="multipart/form-data"
+                        id="form_pertanyaan">
+                        <input type="hidden" name="id_user" value=1>
+                        @csrf
+                        @php
+                            $i = 1;
+                        @endphp
+                        @foreach ($pertanyaan as $pertanyaan)
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col">
+
+                                            <div for="">{{ $i . '. ' }}{{ $pertanyaan->pertanyaan }}</div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio"
+                                                    name="vector[{{ $i }}]" id="" value=1>
+                                                <label class="form-check-label" for="">Ya</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio"
+                                                    name="vector[{{ $i }}]" id="" value=-1>
+                                                <label class="form-check-label" for="">Tidak</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @php
+                                $i++;
+                            @endphp
+                        @endforeach
+
+                </table>
+                <div class="row pt-3">
                     <div class="col">
-                        <div for="">{{ $pertanyaan->pertanyaan }}</div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="vector[{{ $i }}]"
-                                id="" value=1>
-                            <label class="form-check-label" for="">Ya</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="vector[{{ $i }}]"
-                                id="" value=-1>
-                            <label class="form-check-label" for="">Tidak</label>
-                        </div>
+                        <button type="submit" name="button" class="btn btn-success"> Submit </button>
+
                     </div>
                 </div>
-                @php
-                    $i++;
-                @endphp
-            @endforeach
+                </form>
+            </div>
+        </div>
 
 
 
 
-            <button type="submit" name="button">
-                Submit
-            </button>
-        </form>
 
 
 
