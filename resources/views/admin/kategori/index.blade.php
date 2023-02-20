@@ -1,69 +1,137 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Kategori') }}
-        </h2>
-    </x-slot>
-    <div class="container">
+@extends('admin.layouts')
+@section('title', 'Kategori')
+@section('content')
+    <div class="page-breadcrumb">
         <div class="row">
-            <div class="col">
-                <div class="py-12">
-                    <div class="card">
-                        <div class="card-header">Data Kategori</div>
+            <div class="col-5 align-self-center">
+                <h4 class="page-title">Kategori</h4>
+            </div>
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Kategori
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Kategori</th>
+                                    <th>Icon</th>
+                                    <th>Keterangan</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($kategori as $kategori)
+                                    <tr>
+                                        <td>{{ $kategori->id }}</td>
+                                        <td>{{ $kategori->kategori }}</td>
+                                        <td><img src="{{ Storage::url($kategori->icon) }}" class="img-fluid" width="50px">
+                                        </td>
+                                        <td>{{ $kategori->keterangan }}</td>
+                                        <td><button type="button" data-toggle="modal" data-target="#modalUbah"
+                                                class="btn btn-success btn-edit">Ubah</button></td>
+                                    </tr>
+                                    <div class="modal fade" id="modalUbah" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Ubah Data</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{ route('kategori.update', $kategori->id) }}" method="POST"
+                                                    enctype="multipart/form-data">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <input type="hidden" name="kategori" class="kategori"
+                                                        value="{{ $kategori->kategori }}">
+                                                    <input type="hidden" name="id" value="{{ $kategori->id }}">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="keterangan">Keterangan</label>
+                                                            <textarea class="form-control is-valid keterangan" name="keterangan" id="keterangan">{{ $kategori->keterangan }}</textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="icon">Icon</label>
+                                                            <input type="file" name="icon" id="icon"
+                                                                class="form-control" accept="image/*">
+                                                        </div>
 
-                        <div class="card-body">
-                            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Kategori</th>
-                                                <th>Icon</th>
-                                                <th>Keterangan</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($kategori as $kategori)
-                                                <tr>
-                                                    <td>{{ $kategori->id }}</td>
-                                                    <td>{{ $kategori->kategori }}</td>
-                                                    <td>{{ $kategori->icon }}</td>
-                                                    <td>{{ $kategori->keterangan }}</td>
-                                                    <td><button type="button" modal" data-target="#modalUbah"
-                                                            class="btn btn-success">Ubah</button></td>
-                                                </tr>
-                                            @endforeach
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </form>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </tbody>
+                        </table>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    </div>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalUbah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+
+
+@endsection
+
+{{-- @push('after-script')
+    <script>
+        $(document).ready(function() {
+
+            // get Edit Product
+            $('.btn-edit').on('click', function() {
+                // get data from button edit
+                const id = $(this).data('id');
+                const keterangan = $(this).data('keterangan');
+                const kategori = $(this).data('kategori');
+                // Set data to Form Edit
+                $('.id').val(id);
+                $('.kategori').val(kategori);
+                $('.keterangan').val(keterangan);
+
+
+            });
+        });
+    </script>
+@endpush --}}

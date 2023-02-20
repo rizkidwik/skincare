@@ -72,7 +72,16 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $data['icon'] = $request->file('icon')->store('img/icon','public');
+
+        $item = Kategori::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->route('kategori');
+
+
     }
 
     /**

@@ -148,15 +148,21 @@ endfor;
         array_push($hasil_icon,$kategori[$arr_hasil[$i]]->icon);
     }
     // var_dump("Sukses",$hasil_icon);
+
+    Answer::create([
+        'id_user' => $id_user,
+        'answer' => json_encode($answer)
+    ]);
     return view('user.hasil')->with([
         'hasil_kategori' => $hasil_kategori,
         'hasil_keterangan' => $hasil_keterangan,
         'hasil_icon' => $hasil_icon,
     ]);
 
-    Answer::create([
-        'id_user' => $id_user,
-        'answer' => json_encode($answer)
-    ]);
+    }
+
+    public function riwayat()
+    {
+
     }
 }

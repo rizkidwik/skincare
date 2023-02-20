@@ -9,19 +9,28 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <title>Survei</title>
 </head>
 
 <body>
     <div class="container">
         <!-- Image and text -->
-        <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">
+        <nav class="navbar navbar-light bg-dark text-white ">
+            <a class="navbar-brand text-white" href="#">
                 Skincare Recomendation
             </a>
+            <div class="float-right d-flex">
+                <a class="btn btn-primary mr-3" href="{{ route('riwayat') }}">Riwayat</a>
+                <form action="{{ route('logout') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            </div>
         </nav>
-        <div class="card">
+
+
+        <div class="card pt-8">
             <div class="card-header">
                 Diagnosa
             </div>
@@ -90,46 +99,6 @@
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
     </script>
 
-    {{-- <script>
-        $('#form_pertanyaan').on('submit', function(e) {
-            e.preventDefault();
-
-            var ser = $(this).serializeArray();
-            var csrf = "{{ csrf_token() }}"
-
-            $.ajax({
-                url: '/diagnosa/proses',
-                type: 'post',
-                dataType: 'json',
-                headers: {
-                    'X-CSRF-TOKEN': csrf,
-                },
-                data: {
-                    data: ser
-                },
-                success: function(data) {
-                    console.log(data)
-                },
-                error: function(data) {
-                    console.log('error');
-                },
-            });
-
-        });
-    </script> --}}
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
-        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous">
-    </script>
-    -->
 </body>
 
 </html>

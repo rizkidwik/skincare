@@ -13,11 +13,19 @@
 
 <body>
     <div class="container">
-        <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">
+        <nav class="navbar navbar-light bg-dark text-white ">
+            <a class="navbar-brand text-white" href="#">
                 Skincare Recomendation
             </a>
+            <div class="float-right d-flex">
+                <a class="btn btn-primary mr-3" href="{{ route('riwayat') }}">Riwayat</a>
+                <form action="{{ route('logout') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            </div>
         </nav>
+
         <h1 class="text-center">Hasil Rekomendasi</h1>
         <div class="row">
             @for ($i = 0; $i < count($hasil_kategori); $i++)
