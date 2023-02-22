@@ -18,10 +18,10 @@
         <!-- Image and text -->
         <nav class="navbar navbar-light bg-dark text-white ">
             <a class="navbar-brand text-white" href="#">
-                Skincare Recomendation
+                Skincare Diagnose
             </a>
             <div class="float-right d-flex">
-                <a class="btn btn-primary mr-3" href="{{ route('riwayat') }}">Riwayat</a>
+                <a class="btn btn-primary mr-3" href="{{ route('history') }}">Riwayat</a>
                 <form action="{{ route('logout') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <button type="submit" class="btn btn-danger">Logout</button>
@@ -32,7 +32,7 @@
 
         <div class="card pt-8">
             <div class="card-header">
-                Diagnosa
+                Diagnose
             </div>
             <div class="card-body">
                 <table class="table table-striped">
@@ -53,12 +53,12 @@
                                             <div for="">{{ $i . '. ' }}{{ $pertanyaan->pertanyaan }}</div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio"
-                                                    name="vector[{{ $i }}]" id="" value=1>
+                                                    name="vector[{{ $i }}]" id="" value=1 required>
                                                 <label class="form-check-label" for="">Ya</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio"
-                                                    name="vector[{{ $i }}]" id="" value=-1>
+                                                    name="vector[{{ $i }}]" id="" value=-1 required>
                                                 <label class="form-check-label" for="">Tidak</label>
                                             </div>
 

@@ -16,17 +16,31 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('kategori') }}"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('category') }}"
                         aria-expanded="false">
                         <i class="mdi mdi-format-list-bulleted-type"></i>
-                        <span class="hide-menu">Kategori</span>
+                        <span class="hide-menu">Category</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('pertanyaan') }}"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('question') }}"
                         aria-expanded="false">
                         <i class="mdi mdi-comment-question-outline"></i>
-                        <span class="hide-menu">Pertanyaan</span>
+                        <span class="hide-menu">Question</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('history') }}"
+                        aria-expanded="false">
+                        <i class="mdi mdi-history"></i>
+                        <span class="hide-menu">History</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('message') }}"
+                        aria-expanded="false">
+                        <i class="mdi mdi-message"></i>
+                        <span class="hide-menu">Message</span>
                     </a>
                 </li>
 

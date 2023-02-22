@@ -1,10 +1,10 @@
 @extends('admin.layouts')
-@section('title', 'Kategori')
+@section('title', 'Category')
 @section('content')
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Kategori</h4>
+                <h4 class="page-title">Category</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
@@ -14,7 +14,7 @@
                                 <a href="#">Home</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Kategori
+                                Category
                             </li>
                         </ol>
                     </nav>
@@ -34,9 +34,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Kategori</th>
+                                    <th>Category</th>
                                     <th>Icon</th>
-                                    <th>Keterangan</th>
+                                    <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -48,21 +48,21 @@
                                         <td><img src="{{ Storage::url($kategori->icon) }}" class="img-fluid" width="50px">
                                         </td>
                                         <td>{{ $kategori->keterangan }}</td>
-                                        <td><button type="button" data-toggle="modal" data-target="#modalUbah"
-                                                class="btn btn-success btn-edit">Ubah</button></td>
+                                        <td><button type="button" data-toggle="modal"
+                                                data-target="#modalUbah{{ $kategori->id }}"
+                                                class="btn btn-success btn-edit">Edit</button></td>
                                     </tr>
-                                    <div class="modal fade" id="modalUbah" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="modalUbah{{ $kategori->id }}" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Ubah Data</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="{{ route('kategori.update', $kategori->id) }}" method="POST"
+                                                <form action="{{ route('category.update', $kategori->id) }}" method="POST"
                                                     enctype="multipart/form-data">
                                                     @method('PUT')
                                                     @csrf
@@ -71,7 +71,7 @@
                                                     <input type="hidden" name="id" value="{{ $kategori->id }}">
                                                     <div class="modal-body">
                                                         <div class="form-group">
-                                                            <label for="keterangan">Keterangan</label>
+                                                            <label for="keterangan">Description</label>
                                                             <textarea class="form-control is-valid keterangan" name="keterangan" id="keterangan">{{ $kategori->keterangan }}</textarea>
                                                         </div>
                                                         <div class="form-group">

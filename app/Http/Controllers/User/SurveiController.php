@@ -157,6 +157,7 @@ endfor;
         'hasil_kategori' => $hasil_kategori,
         'hasil_keterangan' => $hasil_keterangan,
         'hasil_icon' => $hasil_icon,
+        'all_result' => $hasil_jumlah,
     ]);
 
     }

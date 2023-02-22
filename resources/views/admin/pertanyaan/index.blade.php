@@ -1,12 +1,12 @@
 @extends('admin.layouts')
 
-@section('title', 'Pertanyaan')
+@section('title', 'Question')
 
 @section('content')
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Pertanyaan</h4>
+                <h4 class="page-title">Question</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
@@ -16,7 +16,7 @@
                                 <a href="#">Home</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Pertanyaan
+                                Question
                             </li>
                         </ol>
                     </nav>
@@ -32,9 +32,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        Pertanyaan
+                        Question
                         <button class="btn btn-sm btn-success float-right" data-toggle="modal"
-                            data-target="#exampleModal">Tambah
+                            data-target="#exampleModal">Add
                             Data</button>
                     </div>
                     <div class="card-body">
@@ -42,7 +42,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Pertanyaan</th>
+                                    <th>Question</th>
                                     <th>Vector</th>
                                 </tr>
                             </thead>
@@ -80,7 +80,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('pertanyaan.store') }}" class="form" method="POST"
+                    <form action="{{ route('question.store') }}" class="form" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
