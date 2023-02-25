@@ -23,7 +23,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                if(auth()->user()->level == "ADMIN"){
                 return redirect(RouteServiceProvider::HOME);
+            } else if(auth()->user()->level == "USER"){
+                return redirect()->route('survei');
+            }
             }
         }
 
