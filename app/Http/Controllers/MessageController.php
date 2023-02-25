@@ -46,7 +46,7 @@ class MessageController extends Controller
 
         Message::create($validate);
 
-        return redirect('/');
+        return response()->json(['success'=>'Message sent successfully.']);
     }
 
     /**

@@ -151,7 +151,8 @@ endfor;
 
     Answer::create([
         'id_user' => $id_user,
-        'answer' => json_encode($answer)
+        'answer' => json_encode($answer),
+        'result' => json_encode($hasil_kategori),
     ]);
     return view('user.hasil')->with([
         'hasil_kategori' => $hasil_kategori,
@@ -162,8 +163,11 @@ endfor;
 
     }
 
-    public function riwayat()
+    public function history()
     {
-
+        $answer = Answer::where('id_user',Auth::user()->id)->get();
+        return view('user.history',[
+            'answer' => $answer,
+        ]);
     }
 }

@@ -52,9 +52,18 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active " href="#hero">Home</a></li>
+                    {{-- <li><a class="nav-link scrollto active " href="#hero">Home</a></li> --}}
+                    <li><a class=" btn btn-warning p-2 mx-4" href="{{ route('history-user') }}">History</a>
+                    </li>
 
-                    <li><a class="nav-link scrollto btn btn-primary p-2 mx-4" href="{{ route('login') }}">Login</a>
+                    {{-- <li><a class="nav-link scrollto btn btn-primary p-2 mx-4" href="{{ route('login') }}">Login</a>
+                    </li> --}}
+
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <button type="submit" class=" btn btn-danger p-2 mx-2">Logout</button>
+                        </form>
                     </li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -69,59 +78,28 @@
         <div class="container">
             <div class="row justify-content-between">
                 <div class="card">
-                    <div class="card-header">
-                        Question
-                    </div>
                     <div class="card-body">
-                        <table class="table table-striped">
-
-                            <form action="{{ route('survei.proses') }}" method="POST" enctype="multipart/form-data"
-                                id="form_pertanyaan">
-                                <input type="hidden" name="id_user" value=1>
-                                @csrf
-                                @php
-                                    $i = 1;
-                                @endphp
-                                @foreach ($pertanyaan as $pertanyaan)
-                                    <tr>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col">
-
-                                                    <div for="">
-                                                        {{ $i . '. ' }}{{ $pertanyaan->pertanyaan }}
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="vector[{{ $i }}]" id="" value=1
-                                                            required>
-                                                        <label class="form-check-label" for="">Ya</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="vector[{{ $i }}]" id="" value=-1
-                                                            required>
-                                                        <label class="form-check-label" for="">Tidak</label>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @php
-                                        $i++;
-                                    @endphp
-                                @endforeach
-
+                        <table class="table table-striped-columns">
+                            <tr>
+                                <th>#</th>
+                                <th>User</th>
+                                <th>Answer</th>
+                                <th>Result</th>
+                                <th>Date</th>
+                            </tr>
+                            @foreach ($answer as $answer)
+                                <tr>
+                                    <td>{{ $answer->id }}</td>
+                                    <td>{{ $answer->user->name }}</td>
+                                    <td>{{ $answer->answer }}</td>
+                                    <td>{{ $answer->result }}</td>
+                                    <td>{{ $answer->created_at }}</td>
+                                </tr>
+                            @endforeach
                         </table>
-                        <div class="row pt-3">
-                            <div class="col">
-                                <button type="submit" name="button" class="btn btn-success"> Submit </button>
 
-                            </div>
-                        </div>
+
                     </div>
-                    </form>
                 </div>
             </div>
         </div>

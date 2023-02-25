@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Bootslander Bootstrap Template - Index</title>
+    <title>Skincare Diagnose</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -45,7 +45,7 @@
         <div class="container d-flex align-items-center justify-content-between">
 
             <div class="logo">
-                <h1><a href="{{ url('') }}"><span>Bootslander</span></a></h1>
+                <h1><a href="{{ url('') }}"><span>Skincare Diagnose</span></a></h1>
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="index.html"><img src="{{ asset('front_assets/img/logo.png') }}" alt="" class="img-fluid"></a>-->
             </div>
@@ -70,15 +70,15 @@
             <div class="row justify-content-between">
                 <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
                     <div data-aos="zoom-out">
-                        <h1>Build Your Landing Page With <span>Bootstlander</span></h1>
-                        <h2>We are team of talented designers making websites with Bootstrap</h2>
+                        <h1>Get the best skin care for your <span>Facial Skin</span></h1>
+                        {{-- <h2>We are team of talented designers making websites with Bootstrap</h2> --}}
                         <div class="text-center text-lg-start">
-                            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+                            <a href="{{ route('survei') }}" class="btn-get-started scrollto">Get Started</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
-                    <img src="{{ asset('front_assets/img/hero-img.png') }}" class="img-fluid animated" alt="">
+                    <img src="{{ asset('front_assets/img/skincare.png') }}" class="img-fluid animated" alt="">
                 </div>
             </div>
         </div>

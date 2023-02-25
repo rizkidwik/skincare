@@ -26,8 +26,8 @@ Route::get('/', function () {
 Route::middleware(['auth','user-access:USER'])->group(function(){
     Route::resource('survei',SurveiController::class)->name('index','survei');
     Route::post('/survei/proses', [SurveiController::class, 'proses'])->name('survei.proses');
-    Route::get('/riwayat',[SurveiController::class,'riwayat'])->name('history');
-    Route::post('/message',[MessageController::class,'store'])->name('send-message');
+    Route::get('/user/history',[SurveiController::class,'history'])->name('history-user');
+    Route::post('/send-message',[MessageController::class,'store'])->name('send');
 });
 
 
