@@ -40,6 +40,8 @@ Route::middleware(['auth','user-access:ADMIN'])->group(function () {
     Route::resource('category',KategoriController::class)->name('index','category');
     Route::resource('history',HistoryController::class)->name('index','history');
     Route::resource('message',MessageController::class)->name('index','message');
+    Route::get('/message/{id}',[MessageController::class,'show']);
+
 });
 
 require __DIR__.'/auth.php';

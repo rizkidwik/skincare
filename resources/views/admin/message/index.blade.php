@@ -36,18 +36,30 @@
                                     <th>#</th>
                                     <th>User</th>
                                     <th>Subject</th>
-                                    <th>Message</th>
+                                    {{-- <th>Message</th> --}}
                                     <th>Timestamp</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($message as $message)
-                                    <tr>
-                                        <td>{{ $message->id }}</td>
-                                        <td>{{ $message->user->name }}</td>
+                                    <tr class="@if ($message->status == 0) bg-secondary @endif clickable-row"
+                                        data-href="{{ url('message', $message->id) }}">
+
+                                        <td>
+                                            @if ($message->status == 0)
+                                                <i class="fa fa-envelope"></i>
+                                            @else
+                                                <i class="fa fa-envelope-open"></i>
+                                            @endif{{ $message->id }}
+
+                                        </td>
+                                        <td>
+                                            {{ $message->user->name }}
+                                        </td>
                                         <td>{{ $message->subject }}</td>
-                                        <td>{{ $message->message }}</td>
+                                        {{-- <td>{{ $message->message }}</td> --}}
                                         <td>{{ $message->created_at }}</td>
+
                                     </tr>
                                 @endforeach
 
@@ -62,3 +74,13 @@
 
 
 @endsection
+
+@push('after-script')
+    <script>
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
+@endpush

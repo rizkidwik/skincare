@@ -57,7 +57,14 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Message::findOrFail($id);
+
+        $data->update([
+            'status'=>1,
+        ]);
+        return view('admin.message.show',[
+            'message'=> $data
+        ]);
     }
 
     /**
