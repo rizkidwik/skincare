@@ -26,73 +26,10 @@ class SurveiController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
     public function proses(Request $request)
     {
+        // Validasi data yang dikirim dari form
         $validReq = $request->validate(
             [
                 'vector' => 'required|array',
@@ -101,59 +38,69 @@ class SurveiController extends Controller
                 'vector.required' => 'Pertanyaan harus diisi',
             ]
         );
+
+        // Ambil data pertanyaan
         $allPertanyaan = Pertanyaan::all();
         foreach($allPertanyaan as $pertanyaan)
         {
             $vectorPertanyaan[] =json_decode($pertanyaan->vector);
         }
 
-        $id_user = Auth::user()->id;
+        // Ambil hanya data angka tanpa label
         $answer = array_values($validReq['vector']);
 
-
+        //  Lakukan perhitungan array dengan perulangan
             for($j=0;$j<count($vectorPertanyaan[$j]);$j++):
-        for($i=0;$i < count($answer);$i++):
-            $hasilHitung_x[] = pow((int)$vectorPertanyaan[$i][$j] - $answer[$i],2);
-    endfor;
-endfor;
-    $hasil = array_chunk($hasilHitung_x,20);
+                for($i=0;$i < count($answer);$i++):
+                    $hasilHitung_x[] = pow((int)$vectorPertanyaan[$i][$j] - $answer[$i],2);
+                endfor;
+            endfor;
+
+    // bagi array sesuai dengan jumlah pertanyaan
+    $hasil = array_chunk($hasilHitung_x,count($vectorPertanyaan));
+    // lakukan perhitungan akar
     for($i=0; $i < count($hasil);$i++){
         $hasil_jumlah[] = sqrt(array_sum($hasil[$i]));
     }
 
+    // urutkan array
     asort($hasil_jumlah, SORT_NUMERIC);
-    // $hasil_knn = array_slice($hasil_jumlah, 0, 3);
+
     $kategori = Kategori::all();
-    // $hitung = array_count_values($hasil_jumlah);
-    // print_r($hitung);
+
     $arr_hasil = array();
 
     $arr_cek = $hasil_jumlah;
     for($i=0;$i<count($hasil_jumlah);$i++)
     {
         $cek_array = array_search(min($hasil_jumlah),$arr_cek);
-        // hapus data array
+        // hapus data array yang sama dengan data terkecil
         array_push($arr_hasil,$cek_array);
         unset($arr_cek[$cek_array]);
     }
-    // print_r($hasil_jumlah);
+
+    // hilangkan data kosong dengan 'strlen'
     $arr_hasil = array_filter($arr_hasil,'strlen');
     $hasil_kategori = array();
     $hasil_keterangan = array();
     $hasil_icon = array();
+
+    // ambil data-data pada array dan masukkan sesuai dengan field
     for($i=0;$i<count($arr_hasil);$i++)
     {
         array_push($hasil_kategori,$kategori[$arr_hasil[$i]]->kategori);
         array_push($hasil_keterangan,$kategori[$arr_hasil[$i]]->keterangan);
         array_push($hasil_icon,$kategori[$arr_hasil[$i]]->icon);
     }
-    // var_dump("Sukses",$hasil_icon);
 
+    // Insert data ke database
     Answer::create([
-        'id_user' => $id_user,
+        'id_user' => Auth::user()->id,
         'answer' => json_encode($answer),
         'result' => json_encode($hasil_kategori),
     ]);
+
+    // kembalikan ke tampilan / view dengan data-data
     return view('user.hasil')->with([
         'hasil_kategori' => $hasil_kategori,
         'hasil_keterangan' => $hasil_keterangan,

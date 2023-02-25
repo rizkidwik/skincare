@@ -57,16 +57,30 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="ti-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="Username"
-                                        aria-label="Username" aria-describedby="basic-addon1" name="username" autofocus>
+                                    <input type="text"
+                                        class="form-control form-control-lg @error('username') is-invalid @enderror"
+                                        placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"
+                                        name="username" value="{{ old('username') }}" autofocus>
+                                    @error('username')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon2"><i
-                                                class="ti-pencil"></i></span>
+                                        <span class="input-group-text" id="basic-addon2"><i class="ti-lock"></i></span>
                                     </div>
-                                    <input type="password" class="form-control form-control-lg" placeholder="Password"
-                                        aria-label="Password" aria-describedby="basic-addon1" name="password">
+                                    <input type="password"
+                                        class="form-control form-control-lg @error('password') is-invalid @enderror"
+                                        placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"
+                                        name="password">
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12">
